@@ -16,7 +16,7 @@ def prestamos_por_estado():
     
     for p in prestamos.values():
         if p["estado"] in ["activo", "vencido"]:
-            # Convierte la fecha del JSON para validar atrasos cronológicos
+         
             fecha_est = datetime.strptime(p["fecha_estimada"], "%Y-%m-%d").date()
             if hoy > fecha_est:
                 p["estado"] = "vencido"
