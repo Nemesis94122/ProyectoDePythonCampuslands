@@ -79,7 +79,7 @@ def menu_usuario(usuario):
         print("1. Consultar Catálogo de Herramientas")
         print("2. Solicitar una Herramienta")
         print("3. Ver mis Préstamos")
-        print("4. Consultar disponibilidad y poseedor de herramienta") # <-- REQUERIMIENTO AÑADIDO
+        print("4. Consultar disponibilidad y poseedor de herramienta")
         print("5. Cerrar Sesión")
         op = input("Seleccione una opción: ")
         
@@ -101,7 +101,7 @@ def menu_usuario(usuario):
             for p in historial:
                 print(f"Préstamo {p['id']}: Herramienta: {p['herramienta']} | Estado: {p['estado']} | Devuelve: {p['fecha_estimada']}")
                 
-        elif op == "4": # <-- LÓGICA DEL REQUERIMIENTO AÑADIDA
+        elif op == "4": 
             id_buscado = input("Ingrese el ID de la herramienta a consultar: ").strip().upper()
             msg_estado = m_rep.consultar_poseedor_herramienta(id_buscado)
             print(msg_estado)
@@ -110,7 +110,7 @@ def menu_usuario(usuario):
             break
 
 def menu_reportes():
-    while True: # MEJORA: Bucle iterativo para que el panel no se cierre tras ver un solo reporte
+    while True: 
         print("\n--- REPORTES ESTADÍSTICOS ---")
         print("1. Stock crítico (< 3 unidades)")
         print("2. Préstamos Activos vs Vencidos")
@@ -141,7 +141,6 @@ def menu_reportes():
             break
 
 if __name__ == "__main__":
-    # Inicialización de la cuenta semilla administrativa por defecto
     usuarios_iniciales = {"101": {"id": "101", "nombres": "Admin", "apellidos": "Comunal", "telefono": "0000", "direccion": "Central", "tipo": "administrador"}}
     m_usr.guardar_datos(m_usr.ARCH_USUARIOS, m_usr.cargar_datos(m_usr.ARCH_USUARIOS, usuarios_iniciales))
     
