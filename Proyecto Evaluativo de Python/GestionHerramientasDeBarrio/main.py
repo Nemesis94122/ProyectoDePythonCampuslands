@@ -49,7 +49,6 @@ def menu_admin():
             print(msg)
             
         elif op == "3":
-            # El puente en tu prestamos.py evita que esta línea arroje un AttributeError
             prestamos = m_pres.cargar_datos("prestamos.json", {})
             pendientes = {k: v for k, v in prestamos.items() if v["estado"] == "pendiente_aprobacion"}
             if not pendientes:
