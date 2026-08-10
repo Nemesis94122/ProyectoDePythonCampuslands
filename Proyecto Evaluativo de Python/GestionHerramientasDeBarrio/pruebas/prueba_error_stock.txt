@@ -1,0 +1,41 @@
+-- PASOS DE ENTRADA EN CONSOLA ---
+
+--- BIENVENIDO AL SISTEMA COMUNAL ---
+Ingrese su ID de vecino: 230
+
+=== PANEL DE VECINO: Juan  ===
+1. Consultar Catálogo de Herramientas
+2. Solicitar una Herramienta
+3. Ver mis Préstamos
+4. Consultar disponibilidad y poseedor de herramienta
+5. Cerrar Sesión
+Seleccione una opción: 1
+[H400] Destorillador electrico (construccion) - Disponibles: 2 - Estado: activa
+
+=== PANEL DE VECINO: Juan  ===
+1. Consultar Catálogo de Herramientas
+2. Solicitar una Herramienta
+3. Ver mis Préstamos
+4. Consultar disponibilidad y poseedor de herramienta
+5. Cerrar Sesión
+Seleccione una opción: 2
+Ingrese el ID de la herramienta: H400
+Cantidad requerida: 8
+Fecha estimada de devolución (AAAA-MM-DD): 2026-08-17
+No hay suficientes unidades. Stock actual: 2.
+
+ El sistema detiene de inmediato el procesamiento lógico de la transacción y muestra el mensaje de rechazo:
+   "Stock insuficiente en bodega. Unidades disponibles: 2"
+
+
+--- RESULTADOS DE SALIDA ESPERADOS EN LOS ARCHIVOS DE DATOS ---
+
+* EN EL ARCHIVO 'data/prestamos.json':
+  El sistema NO genera ningún folio nuevo para este intento de préstamo, protegiendo las llaves y evitando escrituras basura de solicitudes inviables.
+
+* EN EL ARCHIVO 'data/herramientas.json':
+  El stock de la herramienta "H400" permanece intacto y seguro en sus 2 unidades disponibles.
+
+* REQUERIMIENTO CUMPLIDO: EN EL ARCHIVO DE TEXTO 'logs/sistema.log':
+  Se comprueba que el sistema capturó la anomalía y escribió de forma persistente una línea de tipo ERROR con el siguiente formato exacto:
+  [AÑO-MES-DÍA HORA] - ERROR - STOCK INSUFICIENTE: Vecino 230 pidió 8 de H400. Stock: 2
