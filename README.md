@@ -7,16 +7,6 @@ Sistema diseñado para gestionar y controlar el préstamo de herramientas entre 
 
 text
 sistema-prestamo-herramientas/
-# Proyecto: Sistema de préstamo de herramientas
-
-Sistema diseñado para gestionar y controlar el préstamo de herramientas entre vecinos, que permite llevar un registro sobre dichas herramientas, usuarios y los préstamos realizados en la comunidad.
-
----
-
-## Estructura del proyecto
-
-text
-sistema-prestamo-herramientas/
 ├── data/
 │   ├── herramientas.json
 │   ├── prestamos.json
@@ -31,7 +21,7 @@ sistema-prestamo-herramientas/
 └── README.md
 
   
-```
+
             
 ## Requerimientos del sistema 
 
@@ -50,7 +40,7 @@ sistema-prestamo-herramientas/
 
 ### 4. Consultas y reportes: (reportes.py)
 - Herramientas con stock bajo.
-- Préstamos activos y vencidos.
+- Prestamos activos y vencidos.
 - Historial de préstamo de un usuario.
 - Herramientas más solicitadas por la comunidad.
 - Usuarios que más herramientas han solicitado.
@@ -68,3 +58,10 @@ sistema-prestamo-herramientas/
 | *Usuario* | Puede consultar el estado de las herramientas, cuándo quedarán disponibles y quién las posee. Puede crear una solicitud de herramienta que debe ser aprobada por el administrador. |
 
 ---
+
+##  Características Principales del Sistema
+
+- *Modularidad en Python:* Código estructurado en módulos independientes (herramientas.py, usuarios.py, prestamos.py, reportes.py, persistencia.py y main.py) para facilitar el mantenimiento.
+- *Control de Inventario en Tiempo Real:* Verificación automática de unidades disponibles previo al préstamo para evitar inconsistencias o sobrepedidos.
+- *Control de Acceso por Roles:* Funcionalidades diferenciadas para Administrador (gestión total y aprobación) y Usuario (solicitud y consulta).
+- *Interfaz de Consola Amigable:* Menús navegables e interactivos diseñados para una fácil operación en terminal.
