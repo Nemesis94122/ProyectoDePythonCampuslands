@@ -21,8 +21,7 @@ def solicitar_prestamo(id_usuario, id_herramienta, cantidad_solicitada, fecha_fi
         
    
     if int(cantidad_solicitada) > herr["cantidad"]:
-        # Requerimiento de la junta: Registrar fallas de stock en el archivo de logs
-        registrar_log(f"STOCK INSUFICIENTE: Vecino {id_usuario} pidió {cantidad_solicitada} de {id_herramienta}. Stock: {herr['cantidad']}", es_error=True)
+         registrar_log(f"STOCK INSUFICIENTE: Vecino {id_usuario} pidió {cantidad_solicitada} de {id_herramienta}. Stock: {herr['cantidad']}", es_error=True)
         return False, f"No hay suficientes unidades. Stock actual: {herr['cantidad']}."
         
    
