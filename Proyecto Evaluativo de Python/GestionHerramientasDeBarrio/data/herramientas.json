@@ -1,0 +1,18 @@
+{
+    "H001": {
+        "id": "H001",
+        "nombre": "Taladro Percutor",
+        "categoria": "construcción",
+        "cantidad": 5,
+        "estado": "activa",
+        "valor": 120.0
+    },
+    "H002": {
+        "id": "H002",
+        "nombre": "Cortacésped Eléctrico",
+        "categoria": "jardinería",
+        "cantidad": 2,
+        "estado": "activa",
+        "valor": 250.0
+    }
+}
