@@ -1,0 +1,18 @@
+{
+    "101": {
+        "id": "101",
+        "nombres": "Admin",
+        "apellidos": "Comunal",
+        "telefono": "0000",
+        "direccion": "Central",
+        "tipo": "administrador"
+    },
+    "202": {
+        "id": "202",
+        "nombres": "Carlos",
+        "apellidos": "Pérez",
+        "telefono": "3159876543",
+        "direccion": "Calle 4 #12-30",
+        "tipo": "residente"
+    }
+}
