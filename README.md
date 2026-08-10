@@ -5,7 +5,7 @@ Sistema diseñado para gestionar y controlar el préstamo de herramientas entre 
 
 ## Estructura del proyecto
 
-text
+```text 
 sistema-prestamo-herramientas/
 ├── data/
 │   ├── herramientas.json
@@ -19,10 +19,8 @@ sistema-prestamo-herramientas/
 │   └── usuarios.py
 ├── main.py
 └── README.md
-
-  
-
-            
+```
+          
 ## Requerimientos del sistema 
 
 ### 1. Gestión de herramientas (herramientas.py)
