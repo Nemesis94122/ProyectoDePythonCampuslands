@@ -23,8 +23,7 @@ def actualizar_herramienta(id_h, campos_nuevos):
     herramientas = cargar_datos(ARCH_HERRAMIENTAS, {})
     if id_h not in herramientas:
         return False, "Herramienta no encontrada."
-    
-    herramientas[id_h].update(campos_nuevos)
+     herramientas[id_h].update(campos_nuevos)
     guardar_datos(ARCH_HERRAMIENTAS, herramientas)
     registrar_log(f"Herramienta ID {id_h} actualizada.")
     return True, "Herramienta actualizada con éxito."
