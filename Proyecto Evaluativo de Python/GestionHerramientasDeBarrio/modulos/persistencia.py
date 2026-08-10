@@ -2,7 +2,6 @@ import os
 import json
 import logging
 
-# Configuración de Logs
 os.makedirs("logs", exist_ok=True)
 os.makedirs("data", exist_ok=True)
 
