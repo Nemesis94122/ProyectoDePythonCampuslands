@@ -49,6 +49,7 @@ def menu_admin():
             print(msg)
             
         elif op == "3":
+            # El puente en tu prestamos.py evita que esta línea arroje un AttributeError
             prestamos = m_pres.cargar_datos("prestamos.json", {})
             pendientes = {k: v for k, v in prestamos.items() if v["estado"] == "pendiente_aprobacion"}
             if not pendientes:
@@ -79,7 +80,8 @@ def menu_usuario(usuario):
         print("1. Consultar Catálogo de Herramientas")
         print("2. Solicitar una Herramienta")
         print("3. Ver mis Préstamos")
-        print("4. Cerrar Sesión")
+        print("4. Consultar disponibilidad y poseedor de herramienta") # <-- REQUERIMIENTO AÑADIDO
+        print("5. Cerrar Sesión")
         op = input("Seleccione una opción: ")
         
         if op == "1":
@@ -95,39 +97,52 @@ def menu_usuario(usuario):
             
         elif op == "3":
             historial = m_rep.historial_usuario(usuario["id"])
+            if not historial:
+                print("No registras solicitudes en el sistema.")
             for p in historial:
                 print(f"Préstamo {p['id']}: Herramienta: {p['herramienta']} | Estado: {p['estado']} | Devuelve: {p['fecha_estimada']}")
                 
-        elif op == "4":
+        elif op == "4": # <-- LÓGICA DEL REQUERIMIENTO AÑADIDA
+            id_buscado = input("Ingrese el ID de la herramienta a consultar: ").strip().upper()
+            msg_estado = m_rep.consultar_poseedor_herramienta(id_buscado)
+            print(msg_estado)
+            
+        elif op == "5":
             break
 
 def menu_reportes():
-    print("\n--- REPORTES ESTADÍSTICOS ---")
-    print("1. Stock crítico (< 3 unidades)")
-    print("2. Préstamos Activos vs Vencidos")
-    print("3. Herramientas más populares")
-    print("4. Vecinos con más préstamos")
-    op = input("Seleccione reporte: ")
-    
-    if op == "1":
-        bajos = m_rep.stock_bajo()
-        for h in bajos.values():
-            print(f"ALERTA: {h['nombre']} - Solo quedan {h['cantidad']} unidades.")
-    elif op == "2":
-        activos, vencidos = m_rep.prestamos_por_estado()
-        print(f"\n>> ACTIVOS ({len(activos)}):")
-        for p in activos: print(f" ID {p['id']} - Vecino {p['usuario']} hasta {p['fecha_estimada']}")
-        print(f"\n>> VENCIDOS ({len(vencidos)}):")
-        for p in vencidos: print(f" ¡ALERTA! ID {p['id']} - Vecino {p['usuario']} venció el {p['fecha_estimada']}")
-    elif op == "3":
-        for nom, cant in m_rep.herramientas_mas_solicitadas():
-            print(f"- {nom}: Solicitada {cant} veces.")
-    elif op == "4":
-        for nom, cant in m_rep.usuarios_mas_activos():
-            print(f"- {nom}: Realizó {cant} préstamos.")
+    while True: # MEJORA: Bucle iterativo para que el panel no se cierre tras ver un solo reporte
+        print("\n--- REPORTES ESTADÍSTICOS ---")
+        print("1. Stock crítico (< 3 unidades)")
+        print("2. Préstamos Activos vs Vencidos")
+        print("3. Herramientas más populares")
+        print("4. Vecinos con más préstamos")
+        print("5. Regresar al Panel de Administrador")
+        op = input("Seleccione reporte: ")
+        
+        if op == "1":
+            bajos = m_rep.stock_bajo()
+            if not bajos:
+                print("Inventario seguro. No hay stock bajo.")
+            for h in bajos.values():
+                print(f"ALERTA: {h['nombre']} - Solo quedan {h['cantidad']} unidades.")
+        elif op == "2":
+            activos, vencidos = m_rep.prestamos_por_estado()
+            print(f"\n>> ACTIVOS ({len(activos)}):")
+            for p in activos: print(f" ID {p['id']} - Vecino {p['usuario']} hasta {p['fecha_estimada']}")
+            print(f"\n>> VENCIDOS ({len(vencidos)}):")
+            for p in vencidos: print(f" ¡ALERTA! ID {p['id']} - Vecino {p['usuario']} venció el {p['fecha_estimada']}")
+        elif op == "3":
+            for nom, cant in m_rep.herramientas_mas_solicitadas():
+                print(f"- {nom}: Solicitada {cant} veces.")
+        elif op == "4":
+            for nom, cant in m_rep.usuarios_mas_activos():
+                print(f"- {nom}: Realizó {cant} préstamos.")
+        elif op == "5":
+            break
 
 if __name__ == "__main__":
-    # Datos de inicio semilla indispensables si el archivo no existe
+    # Inicialización de la cuenta semilla administrativa por defecto
     usuarios_iniciales = {"101": {"id": "101", "nombres": "Admin", "apellidos": "Comunal", "telefono": "0000", "direccion": "Central", "tipo": "administrador"}}
     m_usr.guardar_datos(m_usr.ARCH_USUARIOS, m_usr.cargar_datos(m_usr.ARCH_USUARIOS, usuarios_iniciales))
     
