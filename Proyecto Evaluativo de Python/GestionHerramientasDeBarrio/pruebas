@@ -1,0 +1,98 @@
+--- PASOS DE ENTRADA EN CONSOLA ---
+
+--- BIENVENIDO AL SISTEMA COMUNAL ---
+Ingrese su ID de vecino: 101
+
+=== PANEL DE ADMINISTRADOR ===
+1. Registrar Vecino
+2. Registrar Herramienta
+3. Ver/Aprobar Préstamos Pendientes
+4. Registrar Retorno/Devolución
+5. Menú de Consultas y Reportes
+6. Cerrar Sesión
+Seleccione una opción: 2
+ID Herramienta: H400
+Nombre: Destorillador electrico
+Categoría: construccion
+Cantidad inicial: 4
+Estado (activa/en reparacion): activa
+Valor estimado: 120.0
+Herramienta registrada exitosamente.
+
+=== PANEL DE ADMINISTRADOR ===
+1. Registrar Vecino
+2. Registrar Herramienta
+3. Ver/Aprobar Préstamos Pendientes
+4. Registrar Retorno/Devolución
+5. Menú de Consultas y Reportes
+6. Cerrar Sesión
+Seleccione una opción: 1
+ID: 230
+Nombres: Juan      
+Apellidos: Pacheco
+Teléfono: 3158622330
+Dirección: lagos del cacique
+Tipo (administrador/residente): residente
+Vecino registrado exitosamente.
+
+=== PANEL DE ADMINISTRADOR ===
+1. Registrar Vecino
+2. Registrar Herramienta
+3. Ver/Aprobar Préstamos Pendientes
+4. Registrar Retorno/Devolución
+5. Menú de Consultas y Reportes
+6. Cerrar Sesión
+Seleccione una opción: 6
+
+--- BIENVENIDO AL SISTEMA COMUNAL ---
+Ingrese su ID de vecino: 230
+
+=== PANEL DE VECINO: Juan  ===
+1. Consultar Catálogo de Herramientas
+2. Solicitar una Herramienta
+3. Ver mis Préstamos
+4. Consultar disponibilidad y poseedor de herramienta
+5. Cerrar Sesión
+Seleccione una opción: 2
+Ingrese el ID de la herramienta: H400
+Cantidad requerida: 2
+Fecha estimada de devolución (AAAA-MM-DD): 2026-08-15
+Solicitud P1 creada con éxito. Esperando aprobación del Administrador.
+
+=== PANEL DE VECINO: Juan  ===
+1. Consultar Catálogo de Herramientas
+2. Solicitar una Herramienta
+3. Ver mis Préstamos
+4. Consultar disponibilidad y poseedor de herramienta
+5. Cerrar Sesión
+Seleccione una opción: 5
+
+--- BIENVENIDO AL SISTEMA COMUNAL ---
+Ingrese su ID de vecino: 101
+
+=== PANEL DE ADMINISTRADOR ===
+1. Registrar Vecino
+2. Registrar Herramienta
+3. Ver/Aprobar Préstamos Pendientes
+4. Registrar Retorno/Devolución
+5. Menú de Consultas y Reportes
+6. Cerrar Sesión
+Seleccione una opción: 3
+ID Solicitud: P1 | Vecino: 230 | Herramienta: H400 | Cantidad: 2
+Ingrese ID de solicitud a aprobar (o Enter para cancelar): P1
+Préstamo aprobado e inventario actualizado con éxito.
+
+--- RESULTADOS DE SALIDA ESPERADOS EN LOS ARCHIVOS DE DATOS ---
+
+* EN EL ARCHIVO 'data/herramientas.json':
+  La herramienta "H100" actualiza de forma automática su llave "cantidad" bajando de 4 unidades iniciales a 2 unidades físicas en bodega
+
+ * EN EL ARCHIVO 'data/prestamos.json':
+  Se crea el bloque de la solicitud "P1", cambiando su llave "estado" de "pendiente_aprobacion" a "activo".
+ 
+ * EN EL ARCHIVO DE TEXTO DE AUDITORÍA 'logs/sistema.log':
+  Se comprueba la inserción de las siguientes líneas de eventos cronológicos automáticos:
+  [AÑO-MES-DÍA HORA] - INFO - Herramienta creada con éxito:Destorillador electrico (ID: H400)
+  [AÑO-MES-DÍA HORA] - INFO - Vecino registrado: Juan Pacheco (ID: 230, Rol: residente)
+  [AÑO-MES-DÍA HORA] - INFO - Nueva solicitud de préstamo ID P1 generada por usuario 230.
+  [AÑO-MES-DÍA HORA] - INFO - Préstamo ID P1 aprobado e inventario actualizado.
