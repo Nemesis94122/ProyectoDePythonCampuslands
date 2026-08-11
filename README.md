@@ -63,3 +63,37 @@ sistema-prestamo-herramientas/
 - *Control de Inventario en Tiempo Real:* Verificación automática de unidades disponibles previo al préstamo para evitar inconsistencias o sobrepedidos.
 - *Control de Acceso por Roles:* Funcionalidades diferenciadas para Administrador (gestión total y aprobación) y Usuario (solicitud y consulta).
 - *Interfaz de Consola Amigable:* Menús navegables e interactivos diseñados para una fácil operación en terminal.
+
+---
+
+## Menú de uso observado por el usuario que ejecute el programa 
+
+---
+
+### Panel de administrator
+1. Registrar Vecino
+2. Registrar Herramienta
+3. Ver/Aprobar Préstamos Pendientes
+4. Registrar Retorno/Devolución
+5. Menú de Consultas y Reportes
+6. Cerrar Sesión
+
+---
+
+### Panel de vecino 
+1. Consultar Catálogo de Herramientas
+2. Solicitar una Herramienta
+3. Ver mis Préstamos
+4. Consultar disponibilidad y poseedor de herramienta
+5. Cerrar Sesión
+
+---
+
+### Reportes estadísticos 
+1. Stock crítico 
+2. Préstamos Activos vs Vencidos
+3. Herramientas más populares
+4. Vecinos con más préstamos
+5. Regresar al Panel de Administrador
+
+---
