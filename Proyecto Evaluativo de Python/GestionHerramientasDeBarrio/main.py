@@ -76,7 +76,7 @@ def menu_admin():
 def menu_usuario(usuario):
     while True:
         print(f"\n=== PANEL DE VECINO: {usuario['nombres']} ===")
-        print("1. Consultar Catálogo de Herramientas")
+        print("\033[31m1. Consultar Catálogo de Herramientas\033[0m \u274c")
         print("2. Solicitar una Herramienta")
         print("3. Ver mis Préstamos")
         print("4. Consultar disponibilidad y poseedor de herramienta")
