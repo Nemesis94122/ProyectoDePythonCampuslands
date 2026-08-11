@@ -11,7 +11,7 @@ def login():
     usuarios = m_usr.listar_usuarios()
     
     if id_u in usuarios:
-        return usuarios[id_u]
+        return usuarios[id_u] 
     else:
         print("Usuario no registrado en el sistema.")
         registrar_log(f"Intento de login fallido de ID: {id_u}", es_error=True)
@@ -26,25 +26,40 @@ def menu_admin():
         print("4. Registrar Retorno/Devolución")
         print("5. Menú de Consultas y Reportes")
         print("6. Cerrar Sesión")
-        op = input("Seleccione una opción: ")
+        op = input("Seleccione una opción: ").strip()
         
         if op == "1":
-            id_u = input("ID: ")
-            nom = input("Nombres: ")
-            ape = input("Apellidos: ")
-            tel = input("Teléfono: ")
-            dir_u = input("Dirección: ")
-            tipo = input("Tipo (administrador/residente): ").lower()
+            id_u = input("ID: ").strip()
+            nom = input("Nombres: ").strip()
+            ape = input("Apellidos: ").strip()
+            tel = input("Teléfono: ").strip()
+            dir_u = input("Dirección: ").strip()
+            tipo = input("Tipo (administrador/residente): ").lower().strip()
             exito, msg = m_usr.crear_usuario(id_u, nom, ape, tel, dir_u, tipo)
             print(msg)
             
         elif op == "2":
-            id_h = input("ID Herramienta: ")
-            nom = input("Nombre: ")
-            cat = input("Categoría: ")
-            cant = input("Cantidad inicial: ")
-            est = input("Estado (activa/en reparacion): ")
-            val = input("Valor estimado: ")
+            id_h = input("ID Herramienta: ").strip()
+            nom = input("Nombre: ").strip()
+            cat = input("Categoría: ").strip()
+            
+        
+            while True:
+                cant = input("Cantidad inicial: ").strip()
+                if cant.isdigit():
+                    break
+                print("\u274cError: La cantidad debe ser un número entero positivo.")
+                
+            est = input("Estado (activa/en reparacion): ").strip().lower()
+            
+            while True:
+                val_input = input("Valor estimado: ").strip()
+                val_limpio = val_input.replace(",", "").replace(".", "")
+                if val_limpio.isdigit():
+                    val = val_limpio
+                    break
+                print("\u274cError: Ingrese un valor numérico válido (sin letras ni símbolos).")
+                
             exito, msg = m_herr.crear_herramienta(id_h, nom, cat, cant, est, val)
             print(msg)
             
@@ -56,14 +71,14 @@ def menu_admin():
                 continue
             for k, v in pendientes.items():
                 print(f"ID Solicitud: {k} | Vecino: {v['usuario']} | Herramienta: {v['herramienta']} | Cantidad: {v['cantidad']}")
-            id_a = input("Ingrese ID de solicitud a aprobar (o Enter para cancelar): ")
+            id_a = input("Ingrese ID de solicitud a aprobar (o Enter para cancelar): ").strip()
             if id_a in pendientes:
                 exito, msg = m_pres.aprobar_prestamo(id_a)
                 print(msg)
                 
         elif op == "4":
-            id_p = input("Ingrese ID del préstamo a devolver: ")
-            obs = input("Observaciones del estado de entrega: ")
+            id_p = input("Ingrese ID del préstamo a devolver: ").strip()
+            obs = input("Observaciones del estado de entrega: ").strip()
             exito, msg = m_pres.devolver_herramienta(id_p, obs)
             print(msg)
             
@@ -76,21 +91,28 @@ def menu_admin():
 def menu_usuario(usuario):
     while True:
         print(f"\n=== PANEL DE VECINO: {usuario['nombres']} ===")
-        print("\033[31m1. Consultar Catálogo de Herramientas\033[0m \u274c")
+        print("1. Consultar Catálogo de Herramientas")
         print("2. Solicitar una Herramienta")
         print("3. Ver mis Préstamos")
-        print("4. Consultar disponibilidad y poseedor de herramienta")
+        print("4. Consultar disponibilidad y poseedor de herramienta") 
         print("5. Cerrar Sesión")
-        op = input("Seleccione una opción: ")
+        op = input("Seleccione una opción: ").strip()
         
         if op == "1":
             for h in m_herr.listar_herramientas().values():
                 print(f"[{h['id']}] {h['nombre']} ({h['categoria']}) - Disponibles: {h['cantidad']} - Estado: {h['estado']}")
                 
         elif op == "2":
-            id_h = input("Ingrese el ID de la herramienta: ")
-            cant = input("Cantidad requerida: ")
-            fecha = input("Fecha estimada de devolución (AAAA-MM-DD): ")
+            id_h = input("Ingrese el ID de la herramienta: ").strip()
+            
+        
+            while True:
+                cant = input("Cantidad requerida: ").strip()
+                if cant.isdigit():
+                    break
+                print("\u274cError: La cantidad debe ser un número entero positivo.")
+                
+            fecha = input("Fecha estimada de devolución (AAAA-MM-DD): ").strip()
             exito, msg = m_pres.solicitar_prestamo(usuario["id"], id_h, cant, fecha)
             print(msg)
             
@@ -117,7 +139,7 @@ def menu_reportes():
         print("3. Herramientas más populares")
         print("4. Vecinos con más préstamos")
         print("5. Regresar al Panel de Administrador")
-        op = input("Seleccione reporte: ")
+        op = input("Seleccione reporte: ").strip()
         
         if op == "1":
             bajos = m_rep.stock_bajo()
