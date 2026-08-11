@@ -8,9 +8,15 @@ def crear_herramienta(id_h, nombre, categoria, cantidad, estado, valor):
         registrar_log(f"Intento fallido de crear herramienta existente: ID {id_h}", es_error=True)
         return False, "El ID de la herramienta ya existe."
     
+    valor_limpio = str(valor).replace(",", "").replace(".", "")
+    
     herramientas[id_h] = {
-        "id": id_h, "nombre": nombre, "categoria": categoria,
-        "cantidad": int(cantidad), "estado": estado, "valor": float(valor)
+        "id": id_h, 
+        "nombre": nombre, 
+        "categoria": categoria,
+        "cantidad": int(cantidad), 
+        "estado": estado, 
+        "valor": int(valor_limpio)
     }
     guardar_datos(ARCH_HERRAMIENTAS, herramientas)
     registrar_log(f"Herramienta creada con éxito: {nombre} (ID: {id_h})")
@@ -23,7 +29,12 @@ def actualizar_herramienta(id_h, campos_nuevos):
     herramientas = cargar_datos(ARCH_HERRAMIENTAS, {})
     if id_h not in herramientas:
         return False, "Herramienta no encontrada."
-     herramientas[id_h].update(campos_nuevos)
+    
+    if "valor" in campos_nuevos:
+        valor_limpio = str(campos_nuevos["valor"]).replace(",", "").replace(".", "")
+        campos_nuevos["valor"] = int(valor_limpio)
+        
+    herramientas[id_h].update(campos_nuevos)
     guardar_datos(ARCH_HERRAMIENTAS, herramientas)
     registrar_log(f"Herramienta ID {id_h} actualizada.")
     return True, "Herramienta actualizada con éxito."
@@ -37,3 +48,4 @@ def eliminar_herramienta(id_h):
     guardar_datos(ARCH_HERRAMIENTAS, herramientas)
     registrar_log(f"Herramienta ID {id_h} marcada como fuera de servicio.")
     return True, "Herramienta inactivada (Fuera de servicio)."
+
