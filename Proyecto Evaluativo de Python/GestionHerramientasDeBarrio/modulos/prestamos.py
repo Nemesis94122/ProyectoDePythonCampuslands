@@ -4,7 +4,6 @@ from modulos.persistencia import cargar_datos as cd, guardar_datos as gd, regist
 ARCH_PRESTAMOS = "prestamos.json"
 
 def solicitar_prestamo(id_usuario, id_herramienta, cantidad_solicitada, fecha_fin):
-    """Crea la solicitud de préstamo en el formato exacto que lee el menú principal."""
     prestamos = cd(ARCH_PRESTAMOS, {})
     import modulos.herramientas as m_herr
     herramientas = m_herr.listar_herramientas()
@@ -43,7 +42,6 @@ def solicitar_prestamo(id_usuario, id_herramienta, cantidad_solicitada, fecha_fi
     return True, f"Solicitud {id_p} creada con éxito. Esperando aprobación del Administrador."
 
 def aprobar_prestamo(id_p):
-    """Aprueba el préstamo y descuenta las unidades usando la función del compañero."""
     prestamos = cd(ARCH_PRESTAMOS, {})
     
     if id_p not in prestamos or prestamos[id_p]["estado"] != "pendiente_aprobacion":
@@ -66,7 +64,6 @@ def aprobar_prestamo(id_p):
     return True, "Préstamo aprobado e inventario actualizado con éxito."
 
 def devolver_herramienta(id_p, observaciones):
-    """Procesa el retorno y suma las unidades al JSON de herramientas del compañero."""
     prestamos = cd(ARCH_PRESTAMOS, {})
     
     if id_p not in prestamos or prestamos[id_p]["estado"] != "activo":
