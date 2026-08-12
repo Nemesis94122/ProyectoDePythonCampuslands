@@ -6,7 +6,7 @@ import modulos.prestamos as m_pres
 import modulos.reportes as m_rep
 
 def login():
-    print("\n--- BIENVENIDO AL SISTEMA COMUNAL ---")
+    print("\033[32m\n--- BIENVENIDO AL SISTEMA COMUNAL ---\033[0m")
     id_u = input("Ingrese su ID de vecino: ").strip()
     usuarios = m_usr.listar_usuarios()
     
@@ -19,7 +19,7 @@ def login():
 
 def menu_admin():
     while True:
-        print("\n=== PANEL DE ADMINISTRADOR ===")
+        print("\033[33m\n=== PANEL DE ADMINISTRADOR === \033[0m")
         print("1. Registrar Vecino")
         print("2. Registrar Herramienta")
         print("3. Ver/Aprobar Préstamos Pendientes")
@@ -90,7 +90,7 @@ def menu_admin():
 
 def menu_usuario(usuario):
     while True:
-        print(f"\n=== PANEL DE VECINO: {usuario['nombres']} ===")
+        print(f"\033[32m\n=== PANEL DE VECINO: {usuario['nombres']} ===\033[0m")
         print("1. Consultar Catálogo de Herramientas")
         print("2. Solicitar una Herramienta")
         print("3. Ver mis Préstamos")
@@ -133,7 +133,7 @@ def menu_usuario(usuario):
 
 def menu_reportes():
     while True: 
-        print("\n--- REPORTES ESTADÍSTICOS ---")
+        print("\033[34m\n--- REPORTES ESTADÍSTICOS ---\033[0m")
         print("1. Stock crítico (< 3 unidades)")
         print("2. Préstamos Activos vs Vencidos")
         print("3. Herramientas más populares")
